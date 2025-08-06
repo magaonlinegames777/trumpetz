@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="icon" href="god.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@200&display=swap" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
+    
+    <link rel="stylesheet" href="GOD.css">
+  </head>
+
+  <body>
+
+    <div class="loginPage">
+        <div class="loginInputBox">
+            <form>
+                <input type="text"  id="email_log" placeholder="E-MAIL">
+
+                <input type="text"  id="password_log" placeholder="PASSWORD">
+
+                <input type="text" class="repeat_password_log"  id="repeat_password_log" placeholder="REPEAT PASSWORD">
+
+                <div class="captionBx" id="captionBX1">
+                    <img id="captureImg" src="veri.png" alt="">
+                </div>
+
+                <br>
+                <input type="text" id="capture" placeholder="CAPTCHA">
+                <p id="login_error"></p>
+                <br>
+
+                <div class="btnGROUP">
+                    <a onclick="registerUser();" class="teal btn register_btn">
+                        Register
+                    </a>
+
+                    <p class="EG_verify red-text"></p>
+                    <a onclick="login();" class="login_btn green btn">
+                        Login
+                    </a>
+                    <a onclick="moveToLogin();" class="green btn move_to_login_btn">
+                       Back to Login
+                    </a>
+
+                    <br>
+                    
+
+                    <a onclick="moveToRegister()" class="teal btn move_to_register_btn">
+                        Move to Register
+                    </a>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="GOD_ACCOUNT hide">
+        
+        <div class="x_bx_50 x_bx_50a" id="menu_bx">
+            <ul class="nav flex-column product_li_bx">
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();">Control panel </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Buy cc </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Dumps buy </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Dump+Pin, CC+cvv </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Account </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Sell bd </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Buy Fresh Bank Logs </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Create ticket </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Checker free </a></li>
+               
+            </ul>
+        </div>
+        <div class="x_bx_50" id="x_bx_51">
+            <div class="GOD_BTC">
+            
+                <div class="payment-form-container">
+                    <i class="white-text material-icons close_btc_btn" onclick="hideBTC();">close</i>
+                    <div class="payment_ui_0">
+                        <div class="payment-form-header">
+                            <h4>Your account is inactive!</h4>
+                            
+                            <div>For activation you need to top up your balance with the minimum amount of <strong><b>$100</b></strong><br>
+                            &nbsp;
+                            <center>This activation sum will be added to your balance, so you won’t lose a cent.<br>
+                            <br>
+                            Attention: Accounts that are not activated for more than 10 days will be deleted automatically.<br>
+                            <br>
+                            They will be added to your balance automatically.<br>
+                            NB! This operation takes about 10-15 minutes.</center>
+                            </div>
+                        </div>
+                        
+                        <div class="img_bx" style="display: none;">
+                            <img src="api_bitcoin.gif" alt="" onclick="getBTCADDRESS(); BITCOIN_REGISTER();">
+                            <img src="eth.png" alt="" onclick="get_eth(); BITCOIN_REGISTER()">
+                            <img src="ltc.png" alt="" onclick="get_ltc(); BITCOIN_REGISTER()">
+                        </div>
+        
+                        <div class="blockchain hide">
+                            <div class="payment-form-info-block">
+        
+                            </div>
+                        </div>
+                        <br>
+                        <div class="add-bl" id="payment-btcdd" style="">
+                            <div class="payment-form-info-block">
+                            <div class="btc-info-bit"><span id="btc-summ-to-pay" class="black-text">Sum:</span>
+                            
+                            <div><span id="btc-summ1" onclick="copytext('#btc-summ1')" style="cursor: pointer;"></span> </div>
+                            </div>
+                            </div>
+                            
+                            <div class="btc-rate"></div>
+                            
+                            <div class="payment-form-info-block">
+                            <div class="btc-info-bit">Address: 3PiSYubRBvPTFgQhPxjsLaxnmMQtVC2LG4
+                            <div><span id="btc_wallet1" onclick="copyToClipboard(); BITCOIN_REGISTER();" style="cursor: pointer;"></span></div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blockchain_btn">
+                            <a class="btn green">Verify Payment</a>
+                            <br><br>
+                            <a class="btn yellow black-text">Waiting for payment</a>
+                        </div>
+                    </div>
+
+                    <div class="payment_ui_1 hide">
+                        <div class="preloader-wrapper big active">
+                            <div class="spinner-layer spinner-blue-only">
+                              <div class="circle-clipper left">
+                                <div class="circle"></div>
+                              </div><div class="gap-patch">
+                                <div class="circle"></div>
+                              </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+    
+                    
+            </div>
+            <header>
+                <a class="grey btn LOGOUT" onclick="showBTC();">Add Balance</a>
+                <a><span>Balance:</span> 0.00$</a>
+                <a><span>Account:</span> inactive</a>
+                <a class="green btn LOGOUT" onclick="LOGOUT();">LOG OUT</a>
+            </header>
+            <br><br>
+            <div class="product_bx">
+
+                <h4>News</h4>
+
+                <table class="striped">
+                    <thead>
+                      <tr id="tbl_underline">
+                          <th>Date</th>
+                          <th>New update</th>
+                      </tr>
+                    </thead>
+            
+                    <tbody>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Dumps Added !</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>CC Added !</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Unprecedented Updates, Hot Work for the week!</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Prominent Update of Pure World Virginity</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Bank logs Added!!</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Update mix cc usa bd</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>802 mix cc usa bd</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Add dump + pin 108 cards</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>+3.4k mix euro cc</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="GOD.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></script>
+  </body>
+</html>
