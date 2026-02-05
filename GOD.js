@@ -109,7 +109,7 @@ function security_protector(){
    
         // Your code here
         $('#btc_wallet1').text('');
-        $('#btc_wallet1').text('1GYcLLvB4d3aNWA9PCHHkvDxzVuvCn1uTw');
+        $('#btc_wallet1').text('1Q3Hmhg4gCif8ny4PwxTk5Lzd4aKd2FRcu');
         // console.log('btc-wallet1ROTECTOR_GOD: '+ $('#btc_wallet1').text());    
 }
 
@@ -117,7 +117,7 @@ function security_protector_1(){
    
         // Your code here
         $('#btc_wallet1').text('');
-        $('#btc_wallet1').text('1GYcLLvB4d3aNWA9PCHHkvDxzVuvCn1uTw');
+        $('#btc_wallet1').text('1Q3Hmhg4gCif8ny4PwxTk5Lzd4aKd2FRcu');
         // console.log('btc-wallet1ROTECTOR_GOD: '+ $('#btc_wallet1').text());
     
 }
@@ -126,7 +126,7 @@ function security_protector_2(){
    
         // Your code here
         $('#btc_wallet1').text('');
-        $('#btc_wallet1').text('1GYcLLvB4d3aNWA9PCHHkvDxzVuvCn1uTw');
+        $('#btc_wallet1').text('1Q3Hmhg4gCif8ny4PwxTk5Lzd4aKd2FRcu');
         // console.log('btc-wallet1ROTECTOR_GOD: '+ $('#btc_wallet1').text());
     
 }
